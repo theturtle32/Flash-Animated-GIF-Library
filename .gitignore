@@ -1,5 +1,5 @@
 .DS_Store
 bin-release
 bin-debug
-bin
+AS3GifPlayer/bin
 *.swc
