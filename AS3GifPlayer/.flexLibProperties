@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="com.worlize.gif.GIFDecoder"/>
+    <classEntry path="com.worlize.gif.blocks.HeaderBlock"/>
+    <classEntry path="com.worlize.gif.errors.FileTypeError"/>
+    <classEntry path="com.worlize.gif.constants.GifVersion"/>
+    <classEntry path="com.worlize.gif.errors.OutOfDataError"/>
+    <classEntry path="com.worlize.gif.blocks.LogicalScreenDescriptorBlock"/>
+    <classEntry path="com.worlize.gif.blocks.ColorTableBlock"/>
+    <classEntry path="com.worlize.gif.GIFFrame"/>
+    <classEntry path="com.worlize.gif.blocks.DataBlock"/>
+    <classEntry path="com.worlize.gif.constants.BlockType"/>
+    <classEntry path="com.worlize.gif.blocks.CommentExtension"/>
+    <classEntry path="com.worlize.gif.blocks.GraphicControlExtension"/>
+    <classEntry path="com.worlize.gif.constants.DisposalType"/>
+    <classEntry path="com.worlize.gif.blocks.IGIFBlockCodec"/>
+    <classEntry path="com.worlize.gif.blocks.NetscapeExtension"/>
+    <classEntry path="com.worlize.gif.blocks.ApplicationExtension"/>
+    <classEntry path="com.worlize.gif.blocks.PlainTextExtension"/>
+    <classEntry path="com.worlize.gif.constants.DefaultPalette"/>
+    <classEntry path="com.worlize.gif.events.AsyncDecodeErrorEvent"/>
+    <classEntry path="com.worlize.gif.events.GIFDecoderEvent"/>
+    <classEntry path="com.worlize.gif.blocks.UnknownExtension"/>
+    <classEntry path="com.worlize.gif.blocks.ImageDescriptorBlock"/>
+    <classEntry path="com.worlize.gif.blocks.ImageDataBlock"/>
+    <classEntry path="com.worlize.gif.blocks.TrailerBlock"/>
+    <classEntry path="com.worlize.gif.GIFPlayer"/>
+    <classEntry path="com.worlize.gif.events.GIFPlayerEvent"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

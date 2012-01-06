@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   creationComplete="handleCreationComplete(event)"
+			   backgroundColor="#999999"
+			   minWidth="955" minHeight="600">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.worlize.gif.GIFDecoder;
+			import com.worlize.gif.GIFPlayer;
+			import com.worlize.gif.events.AsyncDecodeErrorEvent;
+			import com.worlize.gif.events.GIFDecoderEvent;
+			import com.worlize.gif.events.GIFPlayerEvent;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.primitives.Graphic;
+			private var ref:FileReference;
+			
+			[Bindable]
+			private var player:GIFPlayer = new GIFPlayer();
+			
+			private var startTime:uint;
+			
+			private function handleOpenClick():void {
+				ref.browse([new FileFilter("Animated GIF", "gif", "GIFF")]);
+			}
+			
+			protected function handleCreationComplete(event:FlexEvent):void
+			{
+				ref = new FileReference();
+				ref.addEventListener(Event.SELECT, handleFileSelect);
+				ref.addEventListener(Event.CANCEL, handleFileCancel);
+				ref.addEventListener(Event.COMPLETE, handleFileLoaded);
+				gifContainer.addChild(player);
+				player.smoothing = false;
+			}
+			
+			private function handleFileSelect(event:Event):void {
+				ref.load();
+			}
+			
+			private function handleFileCancel(event:Event):void {
+				trace("User canceled file selection.");
+			}
+			
+			private function handleFileLoaded(event:Event):void {
+				trace("File loaded.  " + ref.data.length + " bytes.");
+				startTime = (new Date()).valueOf();
+
+				player.addEventListener(GIFPlayerEvent.COMPLETE, handleGifLoadComplete);
+				player.addEventListener(AsyncDecodeErrorEvent.ASYNC_DECODE_ERROR, handleAsyncDecodeErrorEvent);
+				player.addEventListener(GIFPlayerEvent.FRAME_RENDERED, handleFrameRendered);
+				player.loadBytes(ref.data);
+			}
+			
+			private function handleAsyncDecodeErrorEvent(event:AsyncDecodeErrorEvent):void {
+				trace("GifPlayer: Async Decode Error Event: " + event.text);
+				player = null;
+			}
+			
+			private function handleGifLoadComplete(event:GIFPlayerEvent):void {
+				trace("Gif load complete, adding to stage");
+			}
+			
+			private function handleFrameRendered(event:GIFPlayerEvent):void {
+//				trace("Frame " + event.frameIndex + " rendred.");
+			}
+
+			protected function handleFrameSkipChange(event:Event):void {
+				player.enableFrameSkipping = (event.target as CheckBox).selected;
+			}
+			
+			protected function handleScaleChange(event:Event):void {
+				var scale:Number = (event.target as HSlider).value;
+				
+				player.scaleX = player.scaleY = scale;
+			}
+			
+			protected function handleFrameChange(event:Event):void {
+				var frame:Number = (event.target as HSlider).value;
+				player.gotoAndStop(frame);
+			}
+			
+			protected function removeFromStage():void {
+				gifContainer.removeChildren();
+			}
+			
+			protected function addToStage():void {
+				gifContainer.addChild(player);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	
+	<s:HGroup>
+		<s:Button label="Open..." click="handleOpenClick()" />
+		<s:CheckBox label="Enable Frame Skipping" selected="{player.enableFrameSkipping}" change="handleFrameSkipChange(event)" enabled="{player.ready}" />
+		<s:HSlider width="100" value="1.0" minimum="0.5" maximum="3.0" stepSize="0.05" change="handleScaleChange(event)" enabled="{player.ready}" />
+	</s:HGroup>
+	<s:HGroup enabled="{player.ready}">
+		<s:Button label="Play" click="player.play()" />
+		<s:Button label="Pause" click="player.stop()" />
+		<s:HSlider minimum="1" maximum="{player.totalFrames}" stepSize="1" change="handleFrameChange(event)" value="{player.currentFrame}" />
+		<s:Button label="Remove From Stage" click="removeFromStage()" />
+		<s:Button label="Add To Stage" click="addToStage()" />
+	</s:HGroup>
+	
+	
+	
+	<s:SpriteVisualElement id="gifContainer" />
+	
+</s:Application>
