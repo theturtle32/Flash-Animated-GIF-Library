@@ -7,4 +7,3 @@ The speed gains are achieved by avoiding doing any pixel decoding at all by inst
 Check out [http://www.worlize.com](Worlize) and try uploading an animated GIF as your avatar!  :)
 
 [http://worlize.github.com/Flash-Animated-GIF-Library](Try the demo!)
-=====================================================================
