@@ -61,7 +61,6 @@
 			
 			private function handleAsyncDecodeErrorEvent(event:AsyncDecodeErrorEvent):void {
 				trace("GifPlayer: Async Decode Error Event: " + event.text);
-				player = null;
 			}
 			
 			private function handleGifLoadComplete(event:GIFPlayerEvent):void {
