@@ -28,7 +28,7 @@
 			private var startTime:uint;
 			
 			private function handleOpenClick():void {
-				ref.browse([new FileFilter("Animated GIF", "gif", "GIFF")]);
+				ref.browse();
 			}
 			
 			protected function handleCreationComplete(event:FlexEvent):void
