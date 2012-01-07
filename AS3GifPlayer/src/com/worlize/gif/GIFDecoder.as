@@ -442,7 +442,6 @@ package com.worlize.gif
 			frameDecodedCount ++;
 			if (frameDecodedCount === framesToDecode && !_hasError) {
 				renderCompositedFrames();
-				cleanup();
 				
 				var endTime:uint = (new Date()).valueOf();
 				totalDecodeTime = endTime - startTime;

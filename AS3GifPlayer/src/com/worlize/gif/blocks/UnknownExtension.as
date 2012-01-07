@@ -29,8 +29,10 @@ package com.worlize.gif.blocks
 		}
 		
 		public function dispose():void {
-			bytes.clear();
-			bytes = null;
+			if (bytes) {
+				bytes.clear();
+				bytes = null;
+			}
 		}
 	}
 }

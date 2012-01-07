@@ -36,15 +36,15 @@ package com.worlize.gif
 		private var _frameCount:uint = 0;
 		private var _frames:Vector.<GIFFrame>;
 		private var _ready:Boolean = false;
+		private var _imageWidth:Number;
+		private var _imageHeight:Number;
 		
 		public function GIFPlayer(autoPlay:Boolean = true) {
 			this.autoPlay = autoPlay;
 			if (stage) {
 				initMinFrameDelay();
 			}
-			else {
-				addEventListener(Event.ADDED_TO_STAGE, initMinFrameDelay);
-			}
+			addEventListener(Event.ADDED_TO_STAGE, initMinFrameDelay);
 			timer.addEventListener(TimerEvent.TIMER, handleTimer);
 			addEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage);
 		}
@@ -83,6 +83,7 @@ package com.worlize.gif
 			stop();
 			setReady(false);
 			unloadDecoder();
+			dispose();
 			initDecoder();
 		}
 		
@@ -107,6 +108,9 @@ package com.worlize.gif
 			_frames = gifDecoder.frames;
 			_frameCount = _frames.length;
 			_currentFrame = -1;
+			_imageWidth = gifDecoder.width;
+			_imageHeight = gifDecoder.height;
+			gifDecoder.cleanup();
 			unloadDecoder();
 			setReady(true);
 			dispatchEvent(new Event('totalFramesChange'));
@@ -215,6 +219,13 @@ package com.worlize.gif
 			dispatchEvent(renderedEvent);
 		}
 
+		public function dispose():void {
+			if (_frames === null) { return; }
+			for (var i:int = 0; i < _frames.length; i ++) {
+				_frames[i].bitmapData.dispose();
+			}
+		}
+		
 		public function get playing():Boolean {
 			return timer.running;
 		}
@@ -256,6 +267,14 @@ package com.worlize.gif
 		
 		protected function handleAsyncDecodeError(event:AsyncDecodeErrorEvent):void {
 			dispatchEvent(event.clone());
+		}
+		
+		override public function get width():Number {
+			return _imageWidth;
+		}
+		
+		override public function get height():Number {
+			return _imageHeight;
 		}
 	}
 }

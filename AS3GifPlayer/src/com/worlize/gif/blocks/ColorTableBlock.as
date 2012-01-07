@@ -54,8 +54,10 @@ package com.worlize.gif.blocks
 		}
 		
 		public function dispose():void {
-			cachedEncodedBytes.clear();
-			cachedEncodedBytes = null;
+			if (cachedEncodedBytes) {
+				cachedEncodedBytes.clear();
+				cachedEncodedBytes = null;
+			}
 		}
 	}
 }
