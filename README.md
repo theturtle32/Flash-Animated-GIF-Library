@@ -1,10 +1,11 @@
-This is a library that I had to write in order to facilitate animated avatars and room objects in Worlize.  Hope to write some documentation and examples sometime after coming back from CES.
+This is a library that I had to write in order to facilitate animated avatars and room objects in Worlize.  Haven't gotten around to writing any documentation.  For a usage example, take a look at GifTest/src/GifTest.mxml and if you would like me to spend some time writing up documentation, vote for it by sending me a message! ;-)
 
-In my tests it is two orders of magnitude faster than Thibault Imbert's [AS3 Gif Player Class](http://www.bytearray.org/?p=95), and it manages to render every valid GIF file I could find correctly.  Its parser is quite strict, so if you have a GIF that works in the browser but not with this class that probably means your browser is being overly lenient with the corrupt image data.
+In my tests it is two orders of magnitude faster than Thibault Imbert's [AS3 Gif Player Class](http://www.bytearray.org/?p=95), and it manages to correctly render every valid GIF file I could find.  Its parser is quite strict, however, so if you have a GIF that works in the browser but not with this library it probably means your browser is being overly lenient with the corrupt image data.
 
-The speed gains are achieved by avoiding doing any pixel decoding at all by instead splitting and re-packaging each frame of the animation into its own freestanding gif file and then handing the resulting files to Flash to decode the image frame internally via the Loader class.
+The speed gains are achieved by specifically avoiding doing any pixel decoding at all and instead splitting and re-packaging each frame of the animation into its own freestanding gif file, handing the resulting single-frame GIF files to Flash to decode the frame's image data internally via the Loader class.
+
+[http://worlize.github.com/Flash-Animated-GIF-Library](Try the test app)!
 
 Check out [http://www.worlize.com](Worlize) and try uploading an animated GIF as your avatar!  :)
 
-[http://worlize.github.com/Flash-Animated-GIF-Library](Try the demo)
-====================================================================
+This library is made available under the Apache License, Version 2.0
