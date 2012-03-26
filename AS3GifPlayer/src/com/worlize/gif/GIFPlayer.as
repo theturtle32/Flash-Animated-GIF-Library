@@ -213,7 +213,7 @@ package com.worlize.gif
 			// Store current frame index
 			_currentFrame = requestedIndex;
 			
-			var requestedDelay:Number = (currentFrameObject.delayMs === 0) ? 100 : currentFrameObject.delayMs;
+			var requestedDelay:Number = (currentFrameObject.delayMs < 20) ? 100 : currentFrameObject.delayMs;
 			var delay:Number = Math.round(quantizeFrameDelay(requestedDelay, minFrameDelay));
 			delay = Math.max(delay - minFrameDelay/2, 0);
 			timer.delay = delay;
