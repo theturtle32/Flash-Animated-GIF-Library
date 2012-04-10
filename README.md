@@ -5,8 +5,8 @@ In my tests it is two orders of magnitude faster than Thibault Imbert's [AS3 Gif
 The speed gains are achieved by specifically avoiding doing any pixel decoding at all and instead splitting and re-packaging each frame of the animation into its own freestanding gif file, handing the resulting single-frame GIF files to Flash to decode the frame's image data internally via the Loader class.
 
 Try the test app:
-[http://worlize.github.com/Flash-Animated-GIF-Library](Try the test app)
+[Try the test app](http://worlize.github.com/Flash-Animated-GIF-Library)
 
-Check out [http://www.worlize.com](Worlize) and try uploading an animated GIF as your avatar!  :)
+Check out [Worlize](http://www.worlize.com) and try uploading an animated GIF as your avatar!  :)
 
 This library is made available under the Apache License, Version 2.0
