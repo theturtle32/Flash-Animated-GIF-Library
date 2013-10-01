@@ -49,7 +49,7 @@ package com.worlize.gif
 	import flash.utils.ByteArray;
 	import flash.utils.Endian;
 	
-	import mx.controls.Image;
+	//import mx.controls.Image;
 	
 	[Event(name="asyncDecodeError",type="com.worlize.gif.events.AsyncDecodeErrorEvent")]
 	[Event(name="decodeComplete",type="com.worlize.gif.events.GIFDecoderEvent")]
