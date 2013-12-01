@@ -292,5 +292,19 @@ package com.worlize.gif
 		override public function get height():Number {
 			return _imageHeight;
 		}
+		
+		public function getFrame(frame:int):BitmapData
+		{
+			return _frames[frame].bitmapData;
+		}
+		
+		public function getFrames():Vector.<BitmapData>
+		{
+			var c:Vector.<BitmapData> = new Vector.<BitmapData>();
+			for (var i:int = 0; i < _frameCount; ++i) {
+				c.push(getFrame(i));
+			}
+			return c;
+		}
 	}
 }
