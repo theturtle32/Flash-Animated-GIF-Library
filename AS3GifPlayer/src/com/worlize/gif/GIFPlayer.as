@@ -57,9 +57,9 @@ package com.worlize.gif
 		
 		public function GIFPlayer(autoPlay:Boolean = true) {
 			this.autoPlay = autoPlay;
-			if (stage) {
+			//if (stage) {
 				initMinFrameDelay();
-			}
+			//}
 			addEventListener(Event.ADDED_TO_STAGE, initMinFrameDelay);
 			timer.addEventListener(TimerEvent.TIMER, handleTimer);
 			addEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage);
@@ -78,24 +78,28 @@ package com.worlize.gif
 			}
 		}
 		
-		override public function set smoothing(newValue:Boolean):void {
+		override public function set smoothing(newValue:Boolean):void
+		{
 			if (useSmoothing !== newValue) {
 				useSmoothing = newValue;
 				super.smoothing = newValue;
 			}
 		}
-				
-		private function initMinFrameDelay(event:Event=null):void {
-//			stage.frameRate = 60;
-			minFrameDelay = 1000 / stage.frameRate;
+		
+		private function initMinFrameDelay(event:Event = null):void
+		{
+			if (stage) minFrameDelay = 1000 / stage.frameRate;
+			else minFrameDelay = 1000 / 60;
 		}
 		
-		public function loadBytes(data:ByteArray):void {
+		public function loadBytes(data:ByteArray):void
+		{
 			reset();
 			gifDecoder.decodeBytes(data);
 		}
 		
-		public function reset():void {
+		public function reset():void
+		{
 			stop();
 			setReady(false);
 			unloadDecoder();
@@ -131,13 +135,12 @@ package com.worlize.gif
 			setReady(true);
 			dispatchEvent(new Event('totalFramesChange'));
 			dispatchEvent(new GIFPlayerEvent(GIFPlayerEvent.COMPLETE));
-			if (stage) {
-				if (autoPlay) {
-					gotoAndPlay(1);
-				}
-				else {
-					gotoAndStop(1);
-				}
+			
+			if (autoPlay) {
+				gotoAndPlay(1);
+			}
+			else {
+				gotoAndStop(1);
 			}
 		}
 		
